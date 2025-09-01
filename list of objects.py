@@ -34,50 +34,45 @@ class Car: # this is the object
     # end of class
 
 
-# creating car lists
-carobjs1 = [Car("", 0) for i in range(5)]
-carobjs2 = []
+    def PrintDetails(self):
+        print("---------")
+        print("The vehicle ID is : ", self.__VehicleID)
+        print("The vehicle registration is: ", self.__Registration)
+        print("The date of registration is: " + self.__DateOfRegistration)
+        print("The engine size of the vehicle is: ", self.__EngineSize)
+        print("The purchase price of the vehicle is: ", self.__PurchasePrice)
 
-# creating cars with user input
+import random
+carjobs1 = [Car(random.randint(1000,9999), 0) for i in range(5)]
+carjobs2 = []
+
 for i in range(2):
-    carattr1 = input("Please enter the vehicle ID: ")
-    carattr2 = input("Please enter the engine size: ")
-    carobjs2.append(Car(carattr1, carattr2))
+    eng = int(input("Enter engine size: "))
+    vehicle = input("Enter vehicle ID: ")
+    carjobs2.append(Car(vehicle, eng))
 
-# enter purchase price, reg no, and date for carobjs1
-for i in range(len(carobjs1)):
-    print("Please enter the Purchase price: ", carobjs1[i].GetVehicleID())
-    pprice = input()
-    carobjs1[i].SetPurchasePrice(pprice)
+for car in carjobs1:
+    pp = int(input("Enter purchase price of the car: "))
+    reg = int(input("Enter registration number: "))
+    regdate = input("Enter date of registration: ")
 
-    print("Please enter the Registration No: ", carobjs1[i].GetVehicleID())
-    regno = input()
-    carobjs1[i].SetRegistration(regno)
+    car.SetPurchasePrice(pp)
+    car.SetRegistration(reg)
+    car.SetDateOfRegistration(regdate)
 
-    print("Please enter the Date of Registration: ", carobjs1[i].GetVehicleID())
-    date = input()
-    carobjs1[i].SetDateOfRegistration(date)
+for car in carjobs1:
+    car.PrintDetails()
 
-# display carobjs1 details
-print("\n--- Carobjs1 Details ---")
-for i in range(len(carobjs1)):
-    print("Vehicle ID:", carobjs1[i].GetVehicleID())
-    print("Registration No:", carobjs1[i].GetRegistration())
-    print("Date of Registration:", carobjs1[i].GetDateOfRegistration())
-    print("Engine Size:", carobjs1[i].GetEngineSize())
-    print("Purchase Price:", carobjs1[i].GetPurchasePrice())
-    print()
+vehicleID = input("Enter vehicle ID to search for: ")
+flag = False
 
-# allow user to search in carobjs2
-carToDisplay = input("Please enter Vehicle ID of car to view the details: ")
+for car in carjobs2:
+    if car.GetVehicleID() == vehicleID:
+        print("Match found")
+        flag = True
+        break
 
-for i in range(len(carobjs2)):
-    if carToDisplay == carobjs2[i].GetVehicleID():
-        print("\n--- Car Found ---")
-        print("Vehicle ID:", carobjs2[i].GetVehicleID())
-        print("Registration:", carobjs2[i].GetRegistration())
-        print("Date of Registration:", carobjs2[i].GetDateOfRegistration())
-        print("Engine Size:", carobjs2[i].GetEngineSize())
-        print("Purchase Price:", carobjs2[i].GetPurchasePrice())
+if not flag:
+    print("Car with that vehicle ID not found")
 
 
