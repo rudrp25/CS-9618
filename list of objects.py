@@ -1,3 +1,4 @@
+
 class Car: # this is the object
     def __init__(self, n, e):  #constructor, self is not a parameter, n and e are parameters
          self.__VehicleID = n
@@ -32,15 +33,51 @@ class Car: # this is the object
         return(self.__PurchasePrice)
     # end of class
 
-carobjs1 = (Car["",0] for i in range(5))
+
+# creating car lists
+carobjs1 = [Car("", 0) for i in range(5)]
 carobjs2 = []
-car1 = Car("Abcd", 2222)
+
+# creating cars with user input
 for i in range(2):
-    carattr1 = input("Please enter vehicle ID:")
-    carattr2 = input("Please enter engine size: ")
-    carobjs2.append(carattr1,carattr2)
+    carattr1 = input("Please enter the vehicle ID: ")
+    carattr2 = input("Please enter the engine size: ")
+    carobjs2.append(Car(carattr1, carattr2))
+
+# enter purchase price, reg no, and date for carobjs1
 for i in range(len(carobjs1)):
-    print("Please enter the purchase price: ", carobjs1[i].GetPurchasePrice())
+    print("Please enter the Purchase price: ", carobjs1[i].GetVehicleID())
     pprice = input()
     carobjs1[i].SetPurchasePrice(pprice)
-    print("Please enter the reg no for: ", carobjs[i].GetRegistrationNo())
+
+    print("Please enter the Registration No: ", carobjs1[i].GetVehicleID())
+    regno = input()
+    carobjs1[i].SetRegistration(regno)
+
+    print("Please enter the Date of Registration: ", carobjs1[i].GetVehicleID())
+    date = input()
+    carobjs1[i].SetDateOfRegistration(date)
+
+# display carobjs1 details
+print("\n--- Carobjs1 Details ---")
+for i in range(len(carobjs1)):
+    print("Vehicle ID:", carobjs1[i].GetVehicleID())
+    print("Registration No:", carobjs1[i].GetRegistration())
+    print("Date of Registration:", carobjs1[i].GetDateOfRegistration())
+    print("Engine Size:", carobjs1[i].GetEngineSize())
+    print("Purchase Price:", carobjs1[i].GetPurchasePrice())
+    print()
+
+# allow user to search in carobjs2
+carToDisplay = input("Please enter Vehicle ID of car to view the details: ")
+
+for i in range(len(carobjs2)):
+    if carToDisplay == carobjs2[i].GetVehicleID():
+        print("\n--- Car Found ---")
+        print("Vehicle ID:", carobjs2[i].GetVehicleID())
+        print("Registration:", carobjs2[i].GetRegistration())
+        print("Date of Registration:", carobjs2[i].GetDateOfRegistration())
+        print("Engine Size:", carobjs2[i].GetEngineSize())
+        print("Purchase Price:", carobjs2[i].GetPurchasePrice())
+
+
