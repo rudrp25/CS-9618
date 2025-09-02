@@ -53,7 +53,7 @@ for i in range(2):
     vehicle = input("Enter vehicle ID: ")
     carobjs2.append(Car(vehicle, eng))
 
-for car in carjobs1:
+for car in carobjs1:
     pp = int(input("Enter purchase price of the car: "))
     reg = int(input("Enter registration number: "))
     regdate = input("Enter date of registration: ")
@@ -62,11 +62,16 @@ for car in carjobs1:
     car.SetRegistration(reg)
     car.SetDateOfRegistration(regdate)
 
-for i in carobjs2:
+n = len(carobjs2)
+for i in range(n-1):
     swap = False
-    if carobjs2.GetPurchasePrice(i) > carobjs2.GetPurchasePrice(i+1):
+    for j in range(0, n-i-1):
+        if carobjs2[j].GetPurchasePrice() < carobjs2[j].GetPurchasePrice():
+            carobjs2[j], carobjs2[j+1] = carobjs2[j+1], carobjs2[j]
+            swap = True
+    if not swap:
+        break
 
-
-
-
-
+print("\n Cars sorted by descending order of Purchase Price: ")
+for car in carobjs2:
+    car.PrintDetails()
