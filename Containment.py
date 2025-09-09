@@ -22,10 +22,10 @@ class Lesson:
     def GetDuration(self):
         return(self.__DurationMins)
 
-    def OutputLessonsDetails(self):
-        print("Lesson title: ", self.__LessonTitle)
-        print("Lesson duration: ", self.__DurationMins)
-        print("Requires lab? ", self.__RequiresLab)
+    def OutputLessonDetails(self):
+        print("Lesson title: ", self.GetLessonTitle())
+        print("Lesson duration: ", self.GetDuration())
+        print("Requires lab? ", self.GetLabStatus())
 
 
 class Assessment:
@@ -46,8 +46,8 @@ class Assessment:
         return(self.__MaxMarks)
 
     def OutputAssessmentDetails(self):
-        print("Assessment title is: ", self.__AssessmentTitle)
-        print("Max marks obtained: ", self.__MaxMarks)
+        print("Assessment title is: ", self.GetTitle())
+        print("Max marks obtained: ", self.GetMaxMarks())
 
 
 class Course:
@@ -56,41 +56,45 @@ class Course:
         self.__MaxStudents = m
         self.__NumberOfLessons = 0
         self.__CourseLesson = []
-        self.__CourseAssessment = Assessment(t,m)
+        self.__CourseAssessment = None
+
+    def GetTitle(self):
+        return (self.__CourseTitle)
+
+    def GetMaxStudents(self):
+        return (self.__MaxStudents)
+
+    def GetNumberOfLessons(self):
+        return (self.__NumberOfLessons)
+
+    def IncrementLesson(self):
+        self.__NumberOfLessons += 1
 
     def AddLesson(self,t,d,r):
-        self.__NumberOfLessons += 1
         self.__CourseLesson.append(Lesson(t,d,r))
+        self.IncrementLesson()
 
     def AddAssessment(self,t,m):
         self.__CourseAssessment = Assessment(t,m)
 
     def OutputCourseDetails(self):
-        print("Course title: ", self.__CourseTitle)
-        print("Max students: ", self.__MaxStudents)
-        for i in range(self.__NumberOfLessons):
-            print(self.__CourseLesson[i].OutputLessonDetails)
+        print("Course title: ", self.GetTitle())
+        print("Max students: ", self.GetMaxStudents())
+
+        print("--- Lessons ---")
+        for lesson in self.__CourseLesson:
+            lesson.OutputLessonDetails()
+            print()
+        print('--- Assessments --- ')
+        if self.__CourseAssessment:
+            self.__CourseAssessment.OutputAssessmentDetails()
+            print()
 
 # actual task
+course = Course("A Level Computer Science", 30)
+course.AddLesson('Python OOP Basics', 60, True)
+course.AddLesson('Recursion', 50, False)
+course.AddLesson('Abstract Data Types', 70, True)
+course.AddAssessment('Unit Test 1', 50 )
 
-course  = []
-
-t = input("Enter course title: ")
-m = input("Enter max students: ")
-course.append(Course(t,m))
-
-for i in range(0,3):
-    print("-----------------------")
-    t = input("Enter lesson title: ")
-    d = input("Duration of lesson: ")
-    r = input("Does it require lab (Yes/No)? ")
-    course.append(Lesson(t,d,r))
-
-t = input("Add assessment title: ")
-m = input("Max marks for test: ")
-course.append(Assessment(t,m))
-
-for i in course:
-    course[i].OutputCourseDetails()
-    course[i].OutputLessonsDetails()
-    course[i].OutputAssessmentDetails()
+course.OutputCourseDetails()
