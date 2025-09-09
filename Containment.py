@@ -67,7 +67,7 @@ class Course:
 
     def OutputCourseDetails(self):
         print("Course title: ", self.__CourseTitle)
-        print("Lesson duration: ", self.__MaxStudents)
+        print("Max students: ", self.__MaxStudents)
         for i in range(self.__NumberOfLessons):
             print(self.__CourseLesson[i].OutputLessonDetails)
 
