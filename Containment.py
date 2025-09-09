@@ -90,7 +90,7 @@ t = input("Add assessment title: ")
 m = input("Max marks for test: ")
 course.append(Assessment(t,m))
 
-for details in course:
-    details[course].OutputCourseDetails()
-    details[course].OutputLessonsDetails()
-    details[course].OutputAssessmentDetails()
+for i in course:
+    course[i].OutputCourseDetails()
+    course[i].OutputLessonsDetails()
+    course[i].OutputAssessmentDetails()
